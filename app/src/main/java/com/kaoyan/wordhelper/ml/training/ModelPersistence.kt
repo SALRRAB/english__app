@@ -35,7 +35,7 @@ class ModelPersistence(
         val savedZ = jsonToFloatArray(state.zParamsJson)
         val savedWeights = jsonToFloatArray(state.weightsJson)
 
-        if (savedN.size == 12 && savedZ.size == 12 && savedWeights.size == 12) {
+        if (savedN.size == MODEL_DIMENSION && savedZ.size == MODEL_DIMENSION && savedWeights.size == MODEL_DIMENSION) {
             predictor.restore(
                 savedN = savedN,
                 savedZ = savedZ,
@@ -82,6 +82,7 @@ class ModelPersistence(
     }
 
     companion object {
+        const val MODEL_DIMENSION = 12
         fun floatArrayToJson(array: FloatArray): String {
             val jsonArray = JsonArray(array.size)
             array.forEach { jsonArray.add(it.toDouble()) }
