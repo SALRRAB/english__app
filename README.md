@@ -88,6 +88,7 @@ gradle :app:connectedDebugAndroidTest "-Pandroid.testInstrumentationRunnerArgume
 app/
   src/main/java/com/kaoyan/wordhelper/
     data/      # 数据层（数据库、仓储、网络）
+    ml/        # 强化学习模块
     ui/        # Compose 界面与状态管理
     util/      # 工具类与通用能力
   src/test/         # 单元测试
