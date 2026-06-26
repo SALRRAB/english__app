@@ -25,7 +25,8 @@ import androidx.room.PrimaryKey
     indices = [
         Index(value = ["word_id", "book_id"], unique = true),
         Index(value = ["book_id"]),
-        Index(value = ["word_id"])
+        Index(value = ["word_id"]),
+        Index(value = ["book_id", "position"])
     ]
 )
 data class BookWordContent(
@@ -40,5 +41,7 @@ data class BookWordContent(
     val phrases: String = "",
     val synonyms: String = "",
     @ColumnInfo(name = "rel_words")
-    val relWords: String = ""
+    val relWords: String = "",
+    @ColumnInfo(name = "position")
+    val position: Int = 0
 )
