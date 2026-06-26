@@ -991,7 +991,8 @@ class WordRepository(private val database: AppDatabase) {
                     example = draft.example,
                     phrases = draft.phrases,
                     synonyms = draft.synonyms,
-                    relWords = draft.relWords
+                    relWords = draft.relWords,
+                    position = contents.size
                 )
             )
         }
