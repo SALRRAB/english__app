@@ -54,7 +54,7 @@ import kotlinx.coroutines.launch
         TrainingSample::class,
         WordMLStats::class
     ],
-    version = 14,
+    version = 13,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -100,8 +100,7 @@ abstract class AppDatabase : RoomDatabase() {
                     MIGRATION_9_10,
                     MIGRATION_10_11,
                     MIGRATION_11_12,
-                    MIGRATION_12_13,
-                    MIGRATION_13_14
+                    MIGRATION_12_13
                 )
                 .build()
         }
@@ -623,25 +622,6 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        @VisibleForTesting
-        val MIGRATION_13_14 = object : Migration(13, 14) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                ensureColumnExists(
-                    db = db,
-                    table = "tb_book_word_content",
-                    column = "position",
-                    definition = "INTEGER NOT NULL DEFAULT 0"
-                )
-                db.execSQL(
-                    "UPDATE tb_book_word_content SET position = id WHERE position = 0"
-                )
-                db.execSQL(
-                    "CREATE INDEX IF NOT EXISTS index_tb_book_word_content_book_id_position ON tb_book_word_content(book_id, position)"
-                )
-            }
-        }
-
-
         private fun ensureColumnExists(
             db: SupportSQLiteDatabase,
             table: String,
@@ -730,8 +710,7 @@ abstract class AppDatabase : RoomDatabase() {
                         example = draft.example,
                         phrases = draft.phrases,
                         synonyms = draft.synonyms,
-                        relWords = draft.relWords,
-                        position = contents.size
+                        relWords = draft.relWords
                     )
                 )
             }

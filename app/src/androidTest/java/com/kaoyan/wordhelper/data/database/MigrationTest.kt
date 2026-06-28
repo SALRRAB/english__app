@@ -34,8 +34,7 @@ class MigrationTest {
                 AppDatabase.MIGRATION_9_10,
                 AppDatabase.MIGRATION_10_11,
                 AppDatabase.MIGRATION_11_12,
-                AppDatabase.MIGRATION_12_13,
-                AppDatabase.MIGRATION_13_14
+                AppDatabase.MIGRATION_12_13
             )
             .build()
 
@@ -164,19 +163,16 @@ class MigrationTest {
             var hasPhrases = false
             var hasSynonyms = false
             var hasRelWords = false
-            var hasPosition = false
             while (cursor.moveToNext()) {
                 when (cursor.getString(1)) {
                     "phrases" -> hasPhrases = true
                     "synonyms" -> hasSynonyms = true
                     "rel_words" -> hasRelWords = true
-                    "position" -> hasPosition = true
                 }
             }
             assertTrue(hasPhrases)
             assertTrue(hasSynonyms)
             assertTrue(hasRelWords)
-            assertTrue(hasPosition)
         }
 
         roomDb.close()

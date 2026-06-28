@@ -25,7 +25,7 @@ interface WordDao {
            FROM tb_book_word_content c
            INNER JOIN tb_word w ON c.word_id = w.id
            WHERE c.book_id = :bookId
-           ORDER BY c.position ASC, c.id ASC, w.id ASC"""
+           ORDER BY w.id ASC"""
     )
     fun getWordsByBook(bookId: Long): Flow<List<Word>>
 
@@ -42,7 +42,7 @@ interface WordDao {
            FROM tb_book_word_content c
            INNER JOIN tb_word w ON c.word_id = w.id
            WHERE c.book_id = :bookId
-           ORDER BY c.position ASC, c.id ASC, w.id ASC"""
+           ORDER BY w.id ASC"""
     )
     suspend fun getWordsByBookList(bookId: Long): List<Word>
 
@@ -208,7 +208,7 @@ interface WordDao {
                  FROM tb_progress
                  WHERE book_id = :bookId AND status = 2
              )
-           ORDER BY c.position ASC, c.id ASC, w.id ASC
+           ORDER BY w.id ASC
            LIMIT 1"""
     )
     suspend fun getNextNewWord(bookId: Long): Word?
